@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    --color-navy: #1E3A5F;
+    --color-civic-blue: #2563EB;
+    --color-civic-green: #16A34A;
+    --color-civic-amber: #D97706;
+    --color-civic-red: #DC2626;
+  }
+
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    color: #1e293b;
+    background-color: #F8FAFC;
+  }
+
+  a {
+    @apply transition-colors duration-150;
+  }
+}
+
+@layer components {
+  .kpi-card {
+    @apply bg-white rounded-xl shadow-card border border-slate-100 hover:shadow-card-hover transition-shadow duration-200 overflow-hidden;
+  }
+
+  .branch-pill {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold tracking-wide uppercase;
+  }
+
+  .section-header {
+    @apply text-2xl font-bold text-navy-600 tracking-tight;
+  }
+
+  .prose-civic {
+    @apply text-slate-700 leading-relaxed;
+  }
+
+  .stat-card {
+    @apply bg-white rounded-xl border border-slate-100 shadow-card p-5;
+  }
+
+  .input-civic {
+    @apply w-full rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-800
+           placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-navy-600/30
+           focus:border-navy-600 transition;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 rounded-lg bg-navy-600 px-5 py-2.5 text-sm font-semibold
+           text-white hover:bg-navy-700 focus:outline-none focus:ring-2 focus:ring-navy-600/30 transition;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-5 py-2.5
+           text-sm font-semibold text-slate-700 hover:bg-slate-50 focus:outline-none
+           focus:ring-2 focus:ring-navy-600/30 transition;
+  }
+
+  .data-caveat-box {
+    @apply rounded-lg bg-amber-50 border border-amber-200 p-4 text-sm text-amber-900;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #f1f5f9; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
