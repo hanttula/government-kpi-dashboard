@@ -59,6 +59,30 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
+// ─── Live KPI data (fetched from government APIs via cron) ───────────────────
+
+// Latest fetched value + trend for each KPI
+model KPILiveData {
+  kpiId        String   @id
+  currentValue Float
+  trendValue   Float
+  trend        String   // 'up' | 'down' | 'flat'
+  asOfDate     String
+  updatedAt    DateTime @updatedAt
+}
+
+// Historical data points for chart rendering
+model KPIHistoricalPoint {
+  id         String  @id @default(cuid())
+  kpiId      String
+  period     String  // e.g. "2024" or "118th (2023–24)"
+  value      Float
+  annotation String?
+
+  @@unique([kpiId, period])
+  @@index([kpiId])
+}
+
 // ─── App-specific tables ─────────────────────────────────────────────────────
 
 model UserKPIPreference {
