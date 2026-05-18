@@ -24,14 +24,18 @@ async function fetchBLSSeries(
   startYear: number,
   endYear: number,
 ): Promise<BLSSeries[]> {
+  const body: Record<string, unknown> = {
+    seriesid: seriesIds,
+    startyear: startYear.toString(),
+    endyear: endYear.toString(),
+  }
+  // Use registered API key if available — higher rate limits and more current data
+  if (process.env.BLS_API_KEY) body.registrationkey = process.env.BLS_API_KEY
+
   const res = await fetch(BLS_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      seriesid: seriesIds,
-      startyear: startYear.toString(),
-      endyear: endYear.toString(),
-    }),
+    body: JSON.stringify(body),
     cache: 'no-store',
   })
   if (!res.ok) throw new Error(`BLS HTTP ${res.status}`)
