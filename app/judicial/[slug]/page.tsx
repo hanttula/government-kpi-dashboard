@@ -5,7 +5,7 @@ import { judicialKPIs } from '@/data/kpis/judicial'
 import { getRelatedKPIs } from '@/data/kpis'
 import { withLiveData } from '@/lib/kpi-live'
 
-export const revalidate = 3600
+export const dynamic = 'force-dynamic'
 
 interface Props {
   params: { slug: string }

@@ -6,7 +6,7 @@ import { getRelatedKPIs } from '@/data/kpis'
 import { withLiveData } from '@/lib/kpi-live'
 
 // Revalidate every hour — picks up cron-updated DB values
-export const revalidate = 3600
+export const dynamic = 'force-dynamic'
 
 interface Props {
   params: { slug: string }

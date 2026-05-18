@@ -93,7 +93,7 @@ export function KPIDetailView({ kpi, relatedKPIs }: KPIDetailViewProps) {
                 <BarChart2 className="w-4 h-4 text-slate-400" />
                 <h2 className="text-base font-semibold text-slate-900">Historical Trend</h2>
                 <span className="text-xs text-slate-400 ml-auto italic">
-                  Sample / demonstration data — link to live source below
+                  Data sourced from official government APIs
                 </span>
               </div>
               <div className="bg-white rounded-xl border border-slate-100 shadow-card p-4">
