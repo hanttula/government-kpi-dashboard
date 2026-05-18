@@ -46,21 +46,23 @@ async function fetchBLSSeries(
   return json.Results.series as BLSSeries[]
 }
 
-/** Sort monthly BLS data points newest-first, excluding annual averages (M13) */
+/** Sort monthly BLS data points newest-first, excluding annual averages (M13) and unavailable values */
 function sortNewestFirst(data: BLSPoint[]): BLSPoint[] {
   return [...data]
-    .filter((d) => d.period.startsWith('M') && d.period !== 'M13')
+    .filter((d) => d.period.startsWith('M') && d.period !== 'M13' && d.value !== '-')
     .sort((a, b) => {
       const n = (p: BLSPoint) => parseInt(p.year) * 100 + parseInt(p.period.slice(1))
       return n(b) - n(a)
     })
 }
 
-/** Build year-month lookup: "2024-M01" → numeric value */
+/** Build year-month lookup: "2024-M01" → numeric value, skipping unavailable data */
 function buildYMMap(data: BLSPoint[]): Record<string, number> {
   const map: Record<string, number> = {}
   for (const p of data) {
-    if (p.period !== 'M13') map[`${p.year}-${p.period}`] = parseFloat(p.value)
+    if (p.period !== 'M13' && p.value !== '-') {
+      map[`${p.year}-${p.period}`] = parseFloat(p.value)
+    }
   }
   return map
 }
